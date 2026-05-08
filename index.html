@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jones Madruga — Fractional CTO & AI Advisor</title>
+<meta name="description" content="Jones Madruga — Fractional CTO and AI advisor. 20+ years shipping production AI for fintechs, scale-ups, and the boards that fund them. Hourly access to senior judgment, no retainers.">
+<link rel="canonical" href="https://jonesmadruga.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jonesmadruga.com/">
+<meta property="og:title" content="Jones Madruga — Fractional CTO & AI Advisor">
+<meta property="og:description" content="20+ years shipping production AI for fintechs, scale-ups, and the boards that fund them. Hourly access to senior judgment, no retainers.">
+<meta property="og:image" content="https://jonesmadruga.com/jm-headshot.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jones Madruga — Fractional CTO & AI Advisor">
+<meta name="twitter:description" content="20+ years shipping production AI for fintechs, scale-ups, and the boards that fund them.">
+<meta name="twitter:image" content="https://jonesmadruga.com/jm-headshot.jpg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E0E10'/%3E%3Ccircle cx='24' cy='8' r='2.5' fill='%23C7B8FF'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='15' fill='%23ECE9E2'%3EJM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0E0E10;
+    --bg-2: #141418;
+    --bg-3: #1A1A1F;
+    --ink: #ECE9E2;
+    --ink-dim: #9A968C;
+    --ink-faint: #4A4843;
+    --rule: #26252A;
+    --rule-2: #34333A;
+    --accent: #C7B8FF;
+    --accent-deep: #6B5BD2;
+    --warn: #E8B66E;
+    --max: 1240px;
+    --gutter: clamp(20px, 5vw, 80px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 300;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 18px var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(14, 14, 16, 0.6);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .nav.scrolled {
+    border-bottom-color: var(--rule);
+    background: rgba(14, 14, 16, 0.85);
+  }
+
+  .jm-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: -0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .jm-mark .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .nav-links a {
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--rule-2);
+    color: var(--ink);
+    transition: all 0.2s;
+    cursor: pointer;
+    background: transparent;
+  }
+  .btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .btn.primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .btn.primary:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+  .btn .arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  @media (max-width: 720px) {
+    .nav-links a:not(.btn) { display: none; }
+  }
+
+  /* ============ SECTION FRAME ============ */
+  section {
+    padding: clamp(80px, 12vh, 140px) var(--gutter);
+    position: relative;
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    letter-spacing: -0.025em;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 80px;
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 15%, rgba(199, 184, 255, 0.10), transparent 60%),
+      radial-gradient(ellipse 80% 60% at 5% 100%, rgba(107, 91, 210, 0.14), transparent 70%),
+      var(--bg);
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-dim);
+    letter-spacing: 0.12em;
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-mono::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #5BD2A7;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #5BD2A7;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7.5vw, 108px);
+    line-height: 0.98;
+    letter-spacing: -0.038em;
+    margin-bottom: 36px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  .hero-lede {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.4;
+    color: var(--ink-dim);
+    max-width: 560px;
+    margin-bottom: 48px;
+  }
+  .hero-lede strong {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+  }
+
+  .hero-credentials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    max-width: 640px;
+  }
+  .cred-item {
+    padding-right: 24px;
+  }
+  .cred-num {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.025em;
+  }
+  .cred-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* Hero portrait card */
+  .hero-card {
+    position: relative;
+    border: 1px solid var(--rule);
+    background: var(--bg-2);
+    padding: 24px;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 1px solid var(--accent);
+    opacity: 0.3;
+    pointer-events: none;
+    transform: translate(8px, 8px);
+  }
+  .hero-portrait {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--bg-3);
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    filter: saturate(0.9) contrast(1.02);
+  }
+  .hero-card-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .hero-card-meta .role {
+    color: var(--accent);
+  }
+
+  /* Floating JM mark */
+  .jm-float {
+    position: absolute;
+    right: -6vw;
+    bottom: -10vh;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(280px, 38vw, 640px);
+    line-height: 1;
+    color: rgba(199, 184, 255, 0.025);
+    pointer-events: none;
+    z-index: 1;
+    letter-spacing: -0.06em;
+  }
+
+  /* ============ MARQUEE / TRUST ============ */
+  .trust {
+    background: var(--bg-2);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 36px var(--gutter);
+    overflow: hidden;
+  }
+  .trust-inner {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  .trust-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    max-width: 140px;
+    line-height: 1.5;
+    border-right: 1px solid var(--rule);
+    padding-right: 60px;
+  }
+  .marquee {
+    flex: 1;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 64px;
+    animation: marquee 38s linear infinite;
+    width: max-content;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .ml { color: var(--ink-dim); white-space: nowrap; line-height: 1; transition: color 0.3s; }
+  .ml:hover { color: var(--ink); }
+  .logo-nu { font-family: 'Fraunces', serif; font-weight: 500; font-style: italic; font-size: 30px; letter-spacing: -0.02em; }
+  .logo-nu sup { color: var(--accent); font-size: 0.6em; }
+  .logo-arco { font-family: 'Fraunces', serif; font-weight: 400; letter-spacing: 0.05em; text-transform: lowercase; font-size: 26px; }
+  .logo-tembici { font-family: 'Inter Tight', sans-serif; font-weight: 600; letter-spacing: -0.03em; text-transform: lowercase; font-size: 22px; }
+  .logo-stoodi { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 26px; }
+  .logo-immplay { font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: -0.02em; text-transform: lowercase; font-size: 20px; }
+  .logo-geekie { font-family: 'Fraunces', serif; font-weight: 500; text-transform: lowercase; font-size: 24px; }
+  .logo-elo { font-family: 'Inter Tight', sans-serif; font-weight: 600; letter-spacing: 0.18em; font-size: 20px; }
+  .logo-sirius { font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; font-size: 17px; }
+
+  /* ============ SECTION HEADER ============ */
+  .sec-head {
+    margin-bottom: clamp(48px, 7vh, 80px);
+    max-width: 880px;
+  }
+  .sec-head h2 {
+    font-size: clamp(36px, 5.2vw, 68px);
+    line-height: 1.04;
+    margin-bottom: 20px;
+  }
+  .sec-head h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .sec-head p {
+    color: var(--ink-dim);
+    font-size: clamp(16px, 1.5vw, 19px);
+    max-width: 680px;
+    line-height: 1.6;
+  }
+
+  /* ============ SERVICES ============ */
+  .services {
+    background: var(--bg);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service {
+    border: 1px solid var(--rule);
+    padding: 36px 32px;
+    background: var(--bg);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .service:hover {
+    border-color: var(--accent);
+    background: var(--bg-2);
+    transform: translateY(-3px);
+  }
+  .service-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+  }
+  .service-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    margin-bottom: 16px;
+  }
+  .service-body {
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+  .service-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+  }
+
+  /* ============ OUTCOMES ============ */
+  .outcomes {
+    background: var(--bg-2);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .outcome {
+    background: var(--bg-2);
+    padding: 36px 28px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .outcome:hover { background: var(--bg-3); }
+  .outcome-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .outcome-stat {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 4.6vw, 60px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .outcome-stat sup {
+    font-size: 0.45em;
+    color: var(--ink-dim);
+    margin-left: 4px;
+  }
+  .outcome-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .outcome-context {
+    color: var(--ink-dim);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  /* ============ ABOUT ============ */
+  .about {
+    background: var(--bg);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+  .about h2 {
+    font-size: clamp(36px, 4.6vw, 60px);
+    line-height: 1.05;
+    margin-bottom: 32px;
+  }
+  .about h2 em { font-style: italic; color: var(--accent); }
+  .about p {
+    color: var(--ink-dim);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  .about p strong {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* ============ TESTIMONIALS ============ */
+  .voices {
+    background: var(--bg-2);
+    border-top: 1px solid var(--rule);
+  }
+  .voices-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .voice {
+    border: 1px solid var(--rule);
+    padding: 36px 28px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+  .voice-mark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 64px;
+    line-height: 0.5;
+    color: var(--accent);
+    margin-bottom: 24px;
+    height: 28px;
+  }
+  .voice-quote {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+    flex: 1;
+    margin-bottom: 28px;
+  }
+  .voice-attr {
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+  .voice-role {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .voice-context {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ============ ENGAGEMENT / PRICING ============ */
+  .engage {
+    background: var(--bg);
+  }
+  .engage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .engage-card {
+    background: var(--bg);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .engage-card.featured {
+    background: linear-gradient(180deg, rgba(199, 184, 255, 0.04), transparent 60%), var(--bg);
+  }
+  .engage-card.featured::before {
+    content: 'MOST COMMON';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+  .engage-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+  }
+  .engage-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+  }
+  .engage-format {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .engage-price {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .engage-price small {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+    margin-left: 6px;
+  }
+  .engage-price-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .engage-desc {
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    flex: 1;
+  }
+  .engage-list {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+  .engage-list li {
+    color: var(--ink-dim);
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 6px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+  .engage-list li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .engage-card .btn {
+    align-self: flex-start;
+  }
+
+  /* ============ CTA ============ */
+  .cta {
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(199, 184, 255, 0.14), transparent 70%),
+      var(--bg);
+    text-align: center;
+  }
+  .cta-headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6.5vw, 92px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin-bottom: 24px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-headline em { font-style: italic; color: var(--accent); }
+  .cta-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 1.8vw, 24px);
+    color: var(--ink-dim);
+    margin-bottom: 56px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 80px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .contact-item {
+    background: var(--bg);
+    padding: 28px 20px;
+  }
+  .contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .contact-value {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(15px, 1.4vw, 19px);
+    font-weight: 400;
+    word-break: break-word;
+  }
+  .contact-value a {
+    border-bottom: 1px solid var(--ink-faint);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .contact-value a:hover { border-color: var(--accent); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 32px var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-card { max-width: 420px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .services-grid,
+    .outcomes-grid,
+    .voices-grid,
+    .engage-grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-grid { grid-template-columns: 1fr; }
+    .trust-inner { gap: 24px; }
+    .trust-label { padding-right: 24px; max-width: 110px; }
+  }
+  @media (max-width: 600px) {
+    .hero-credentials { grid-template-columns: 1fr 1fr; gap: 20px 0; }
+    .hero { padding-top: 100px; }
+  }
+
+  /* ============ FADE IN ============ */
+  .fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="jm-mark"><span class="dot"></span> Jones Madruga</a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#outcomes">Outcomes</a>
+    <a href="#voices">Voices</a>
+    <a href="#engage">Engage</a>
+    <a href="#book" class="btn primary">Book a call <span class="arrow">→</span></a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" data-screen-label="Hero">
+  <div class="jm-float">JM</div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-mono">Currently taking new engagements · Q3 2026</div>
+      <h1 class="hero-title">
+        AI ambition,<br>
+        turned into <em>engineering<br>reality.</em>
+      </h1>
+      <p class="hero-lede">
+        I'm <strong>Jones Madruga</strong> — Fractional CTO and AI advisor. Twenty years shipping production AI for fintechs, scale-ups, and the boards that fund them. Hourly access to senior judgment, no retainers.
+      </p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn primary">Book a 30-min call <span class="arrow">→</span></a>
+        <a href="#engage" class="btn">See engagement formats</a>
+      </div>
+      <div class="hero-credentials">
+        <div class="cred-item">
+          <div class="cred-num">26.6M</div>
+          <div class="cred-label">Customers on platforms I've architected</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-num">3×</div>
+          <div class="cred-label">CTO seats — two publicly listed</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-num">~$6B</div>
+          <div class="cred-label">Cash recoveries enabled at Nubank</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-portrait">
+        <img src="jm-headshot.jpg" alt="Jones Madruga, Fractional CTO and AI Advisor" loading="eager" fetchpriority="high">
+      </div>
+      <div class="hero-card-meta">
+        <span>JM · São Paulo</span>
+        <span class="role">Fractional CTO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST MARQUEE ============ -->
+<div class="trust" data-screen-label="Trust">
+  <div class="trust-inner">
+    <div class="trust-label">Built &amp; scaled at</div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span class="ml logo-nu">Nu<sup>•</sup></span>
+        <span class="ml logo-arco">arco</span>
+        <span class="ml logo-tembici">tembici</span>
+        <span class="ml logo-stoodi">stoodi</span>
+        <span class="ml logo-immplay">immplay</span>
+        <span class="ml logo-geekie">geekie</span>
+        <span class="ml logo-elo">ELO</span>
+        <span class="ml logo-sirius">SIRIUS</span>
+        <!-- duplicate for loop -->
+        <span class="ml logo-nu">Nu<sup>•</sup></span>
+        <span class="ml logo-arco">arco</span>
+        <span class="ml logo-tembici">tembici</span>
+        <span class="ml logo-stoodi">stoodi</span>
+        <span class="ml logo-immplay">immplay</span>
+        <span class="ml logo-geekie">geekie</span>
+        <span class="ml logo-elo">ELO</span>
+        <span class="ml logo-sirius">SIRIUS</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services" data-screen-label="Services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The Practice</div>
+      <h2>Three fronts where I create <em>asymmetric</em> leverage with AI.</h2>
+      <p>Most engagements anchor on one or two of these. The same framework whether you're a Series A founder figuring out where AI fits, or a leadership team that wants an experienced outside operator helping shape the roadmap.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service">
+        <div class="service-num">FRONT 01</div>
+        <h3 class="service-title">AI inside the engineering organization</h3>
+        <p class="service-body">How your engineering team uses AI to ship faster, with higher quality, at lower cost. Workflow integration, agentic tooling, governance, developer adoption. Not Copilot evangelism — operating model design.</p>
+        <div class="service-tags">
+          <span class="service-tag">Dev workflows</span>
+          <span class="service-tag">Agentic tooling</span>
+          <span class="service-tag">Governance</span>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-num">FRONT 02</div>
+        <h3 class="service-title">AI inside your product</h3>
+        <p class="service-body">How AI creates real value for your customers — not as a feature checkbox, but as a wedge. Roadmap, architecture, build-vs-buy, and the hard tradeoffs between speed, cost, and reliability when you're shipping AI at scale.</p>
+        <div class="service-tags">
+          <span class="service-tag">Roadmap</span>
+          <span class="service-tag">Architecture</span>
+          <span class="service-tag">Build vs. buy</span>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-num">FRONT 03</div>
+        <h3 class="service-title">AI across the broader organization</h3>
+        <p class="service-body">How product, ops, marketing, finance, and legal teams adopt AI day-to-day. Different solutions, equal importance — the compounding gains usually live here, and most companies are leaving them on the table.</p>
+        <div class="service-tags">
+          <span class="service-tag">Org enablement</span>
+          <span class="service-tag">Workflow design</span>
+          <span class="service-tag">Adoption</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTCOMES ============ -->
+<section class="outcomes" id="outcomes" data-screen-label="Outcomes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Receipts</div>
+      <h2>What it looks like when this <em>actually</em> ships.</h2>
+      <p>Selected results from operating roles. The same instincts and frameworks I bring to advisory engagements.</p>
+    </div>
+
+    <div class="outcomes-grid">
+      <div class="outcome">
+        <div class="outcome-meta">Fintech · NYSE-listed</div>
+        <div class="outcome-stat">66.5<sup>tNPS</sup></div>
+        <div class="outcome-title">AI agent on WhatsApp for debt renegotiation</div>
+        <p class="outcome-context">Designed and shipped end-to-end. Customer-grade quality at scale across millions of conversations.</p>
+      </div>
+      <div class="outcome">
+        <div class="outcome-meta">Fintech · NYSE-listed</div>
+        <div class="outcome-stat">~99%</div>
+        <div class="outcome-title">Average API latency reduction</div>
+        <p class="outcome-context">From ~800ms to ~7ms; P99 from ~5s to ~95ms. ~97% reduction in DynamoDB rules-table cost with zero feature impact.</p>
+      </div>
+      <div class="outcome">
+        <div class="outcome-meta">Fintech · NYSE-listed</div>
+        <div class="outcome-stat">2wk → 4d</div>
+        <div class="outcome-title">Internal agent cut policy &amp; test cycles</div>
+        <p class="outcome-context">Internal agentic tool reduced policy and test validation cycles from ~2 weeks to ~4 days, directly improving engineering velocity.</p>
+      </div>
+      <div class="outcome">
+        <div class="outcome-meta">Fintech · NYSE-listed</div>
+        <div class="outcome-stat">800K+</div>
+        <div class="outcome-title">Investors in an in-app NYSE IPO experience</div>
+        <p class="outcome-context">Architected and shipped an in-app IPO investing flow inside an app used by 48M+ users.</p>
+      </div>
+      <div class="outcome">
+        <div class="outcome-meta">EdTech · NASDAQ-listed</div>
+        <div class="outcome-stat">75%</div>
+        <div class="outcome-title">Cloud cost reduction during transformation</div>
+        <p class="outcome-context">~R$600K/month savings, availability up from &lt;80% to 98.7%. Engineering turnover dropped from 22% to 8.9%.</p>
+      </div>
+      <div class="outcome">
+        <div class="outcome-meta">Mobility · LATAM</div>
+        <div class="outcome-stat">6 → 60+</div>
+        <div class="outcome-title">Engineering team scaled in under one year</div>
+        <p class="outcome-context">eNPS held above 77. Built a 7TB+ data lake from scratch; ran 8 AI experiments in 6 months; cut variable cloud cost per trip 5x.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about" data-screen-label="About">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">Who I Am</div>
+      <h2>An operator who has <em>shipped</em> AI in production — not just advised on it.</h2>
+    </div>
+    <div>
+      <p>
+        I've spent <strong>20+ years</strong> building and scaling customer-facing platforms across fintech, edtech, and mobility — combining deep backend, distributed systems, and AI/ML expertise with a record of hands-on technical leadership.
+      </p>
+      <p>
+        Most recently I was <strong>Director of Engineering at Nubank</strong> (NYSE: NU), leading the Global Collections platform — serving 26.6M customers and enabling ~$6B in cash recoveries — where I shipped AI-integrated experiences across WhatsApp and Voice channels and drove ~99% latency reductions in production.
+      </p>
+      <p>
+        I've held three CTO seats — at <strong>Arco Educação</strong> (NASDAQ), Tembici, and Stoodi — built data platforms processing terabytes of unstructured government data, and teach applied Machine Learning at <strong>Sirius</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="voices" id="voices" data-screen-label="Voices">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">From the Field</div>
+      <h2>Why founders, operators, and investors keep <em>coming back.</em></h2>
+    </div>
+
+    <div class="voices-grid">
+      <div class="voice">
+        <div class="voice-mark">"</div>
+        <p class="voice-quote">Jones helped us move from AI curiosity to AI execution. He understood our product, our operating constraints, and our team maturity, then turned that into a practical implementation roadmap. Within weeks, we had clearer priorities, faster internal adoption, and a much better sense of where AI could create real leverage.</p>
+        <div class="voice-attr">
+          <div class="voice-role">Chief Executive Officer</div>
+          <div class="voice-context">Series A Startup</div>
+        </div>
+      </div>
+
+      <div class="voice">
+        <div class="voice-mark">"</div>
+        <p class="voice-quote">Rare combination of deep engineering judgment, platform thinking, and pragmatic AI implementation experience. He helped us think through architecture, governance, developer workflows, quality controls, and adoption at scale. His work raised the technical bar while keeping the team focused on measurable impact.</p>
+        <div class="voice-attr">
+          <div class="voice-role">Chief Technology Officer</div>
+          <div class="voice-context">Big Tech Company</div>
+        </div>
+      </div>
+
+      <div class="voice">
+        <div class="voice-mark">"</div>
+        <p class="voice-quote">An exceptional partner to our portfolio companies on AI implementation. He helps founders avoid the two common traps: overbuilding AI infrastructure too early, or applying AI only as a superficial feature. Clear path from strategy to execution, with the right balance of speed and commercial relevance.</p>
+        <div class="voice-attr">
+          <div class="voice-role">Investor</div>
+          <div class="voice-context">Venture Capital Fund</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENGAGEMENT / PRICING ============ -->
+<section class="engage" id="engage" data-screen-label="Engage">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">How It Works</div>
+      <h2>Light-touch, <em>high-leverage.</em></h2>
+      <p>Three formats. Most clients start with hourly access — no retainers, no minimums, no awkward off-ramps.</p>
+    </div>
+
+    <div class="engage-grid">
+      <div class="engage-card featured">
+        <div class="engage-num">FORMAT 01</div>
+        <h3 class="engage-title">Hourly engagement</h3>
+        <div class="engage-format">Default · Flexible</div>
+        <div class="engage-price">By the hour</div>
+        <div class="engage-price-note">Rate shared on first call</div>
+        <p class="engage-desc">Senior judgment, hour by hour. Most clients use 8–24 hours per month. The fastest way to start, and the easiest to stop.</p>
+        <ul class="engage-list">
+          <li>No retainer, no minimum commitment</li>
+          <li>Async + scheduled sessions</li>
+          <li>Slack &amp; calendar access</li>
+          <li>Outcome-driven, not hour-counting</li>
+        </ul>
+        <a href="#book" class="btn primary">Book a 30-min call <span class="arrow">→</span></a>
+      </div>
+
+      <div class="engage-card">
+        <div class="engage-num">FORMAT 02</div>
+        <h3 class="engage-title">Defined-scope project</h3>
+        <div class="engage-format">4–24 weeks · Deliverable-based</div>
+        <div class="engage-price">Fixed scope</div>
+        <div class="engage-price-note">Custom proposal</div>
+        <p class="engage-desc">For specific work — an AI strategy, an architecture review, a CTO assessment, a board-ready roadmap. Fixed scope, fixed price, clear deliverable.</p>
+        <ul class="engage-list">
+          <li>Architecture &amp; code reviews</li>
+          <li>AI strategy &amp; roadmap</li>
+          <li>CTO assessments &amp; org design</li>
+          <li>Executive read-outs</li>
+        </ul>
+        <a href="#book" class="btn">Discuss a project <span class="arrow">→</span></a>
+      </div>
+
+      <div class="engage-card">
+        <div class="engage-num">FORMAT 03</div>
+        <h3 class="engage-title">Board &amp; advisor seats</h3>
+        <div class="engage-format">Ongoing · Long-horizon</div>
+        <div class="engage-price">By invitation</div>
+        <div class="engage-price-note">Selective by design</div>
+        <p class="engage-desc">Independent board seats and formal advisor roles for companies where I can be useful for years, not weeks.</p>
+        <ul class="engage-list">
+          <li>Independent board seats</li>
+          <li>Formal advisor roles</li>
+          <li>VC fund partnerships</li>
+          <li>Portfolio support &amp; due diligence</li>
+        </ul>
+        <a href="#book" class="btn">Get in touch <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="book" data-screen-label="Book">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content: center;">Next Step</div>
+    <h2 class="cta-headline">If you have a real <em>problem</em>,<br>I have real <em>time.</em></h2>
+    <p class="cta-sub">A 30-minute first call is the cheapest way to find out if we should work together.</p>
+
+    <div class="cta-actions">
+      <a href="mailto:contact@jonesmadruga.com?subject=Intro%20call" class="btn primary">Book a 30-min call <span class="arrow">→</span></a>
+      <a href="mailto:contact@jonesmadruga.com?subject=Project%20brief" class="btn">Send a brief</a>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:contact@jonesmadruga.com">contact@jonesmadruga.com</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value"><a href="https://www.linkedin.com/in/jonesmadruga">/in/jonesmadruga</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">+55 (11) 97370-0739</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>JM · Independent Practice · Est. 2009</span>
+  <span>São Paulo · LATAM &amp; United States</span>
+  <span>© 2026 Jones Madruga</span>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Fade in
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('section .wrap > *, .trust-inner').forEach(el => {
+    el.classList.add('fade');
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
