@@ -1,0 +1,139 @@
+# Mal (mal.ai) monitoring — source registry.
+#
+# scripts/aggregate.py reads this file. Each entry under `feeds` becomes one
+# HTTP GET. Add or remove sources here; do not hard-code URLs in scripts.
+#
+# Query terms — edit `entity` to match the target. Track both the company
+# and the CEO. CEO name left as a placeholder; replace `<CEO_NAME>` once
+# confirmed (public LinkedIn / Crunchbase).
+
+entity:
+  company:
+    name: "Mal"
+    handles: ["mal.ai", "Mal AI", "@mal_ai"]
+    domain: "mal.ai"
+  ceo:
+    name: "<CEO_NAME>"
+    handles: []
+  themes:
+    - "Islamic finance"
+    - "Sharia compliant"
+    - "AI native"
+    - "halal finance"
+    - "fintech UAE"
+    - "neobank Gulf"
+
+# Nitter instances — fall through in order. When the first fails, scripts
+# automatically try the next. Keep this list current:
+# https://github.com/zedeus/nitter/wiki/Instances
+nitter_instances:
+  - "nitter.net"
+  - "nitter.privacydev.net"
+  - "nitter.poast.org"
+  - "nitter.cz"
+
+feeds:
+
+  # --- Regional press (Gulf) ---
+  - id: thenational_search
+    label: "The National — search"
+    category: regional_press
+    # The National's site search has no RSS; we proxy via Google News
+    # constrained to thenationalnews.com.
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Athenationalnews.com&hl=en-AE&gl=AE&ceid=AE:en'
+
+  - id: gulfnews_search
+    label: "Gulf News — search"
+    category: regional_press
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Agulfnews.com&hl=en-AE&gl=AE&ceid=AE:en'
+
+  - id: khaleejtimes_search
+    label: "Khaleej Times — search"
+    category: regional_press
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Akhaleejtimes.com&hl=en-AE&gl=AE&ceid=AE:en'
+
+  - id: arabianbusiness_search
+    label: "Arabian Business — search"
+    category: regional_press
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Aarabianbusiness.com&hl=en-AE&gl=AE&ceid=AE:en'
+
+  - id: thenational_business_rss
+    label: "The National — Business section (full feed, filtered downstream)"
+    category: regional_press
+    url: 'https://www.thenationalnews.com/business/rss.xml'
+    filter_required: true  # Only keep items whose title/summary mentions entity terms
+
+  # --- MENA tech press ---
+  - id: wamda_rss
+    label: "Wamda — all"
+    category: tech_press_mena
+    url: 'https://www.wamda.com/feed'
+    filter_required: true
+
+  - id: menabytes_search
+    label: "MENAbytes — search"
+    category: tech_press_mena
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Amenabytes.com&hl=en&gl=US&ceid=US:en'
+
+  # --- Global tech press ---
+  - id: techcrunch_search
+    label: "TechCrunch — search"
+    category: tech_press_global
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Atechcrunch.com&hl=en&gl=US&ceid=US:en'
+
+  - id: sifted_search
+    label: "Sifted — search"
+    category: tech_press_global
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Asifted.eu&hl=en&gl=US&ceid=US:en'
+
+  # --- Islamic finance trade press ---
+  - id: salaamgateway_search
+    label: "Salaam Gateway — search"
+    category: islamic_finance_press
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Asalaamgateway.com&hl=en&gl=US&ceid=US:en'
+
+  - id: ifn_search
+    label: "Islamic Finance News — search"
+    category: islamic_finance_press
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Aislamicfinancenews.com&hl=en&gl=US&ceid=US:en'
+
+  # --- Catch-all (broadest net) ---
+  - id: google_news_global
+    label: "Google News — global, all entities"
+    category: catch_all
+    url: 'https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+%22Islamic+finance%22&hl=en&gl=US&ceid=US:en'
+
+  - id: google_news_ceo
+    label: "Google News — CEO"
+    category: catch_all
+    # Replace <CEO_NAME> placeholder once known.
+    url: 'https://news.google.com/rss/search?q=%22%3CCEO_NAME%3E%22+%22Mal%22&hl=en&gl=US&ceid=US:en'
+
+  # --- X / Twitter via Nitter ---
+  # `{nitter}` is substituted at fetch time with the first reachable instance
+  # from `nitter_instances` above.
+  - id: nitter_company
+    label: "X — company mentions"
+    category: social_x
+    url: 'https://{nitter}/search/rss?f=tweets&q=%22mal.ai%22+OR+%22Mal+AI%22'
+
+  - id: nitter_handle
+    label: "X — @mal_ai handle"
+    category: social_x
+    url: 'https://{nitter}/mal_ai/rss'
+
+  # --- LinkedIn ---
+  # LinkedIn has no public RSS. We rely on Google Alerts (configured in
+  # google-alerts.md) which delivers email, converted to RSS via
+  # Kill-the-Newsletter. Paste the resulting feed URL here.
+  - id: google_alert_linkedin_company
+    label: "Google Alert — site:linkedin.com (company)"
+    category: linkedin
+    url: 'REPLACE_WITH_KILL_THE_NEWSLETTER_FEED_URL'
+    enabled: false  # Flip to true after setup.
+
+  - id: google_alert_linkedin_ceo
+    label: "Google Alert — site:linkedin.com (CEO)"
+    category: linkedin
+    url: 'REPLACE_WITH_KILL_THE_NEWSLETTER_FEED_URL'
+    enabled: false

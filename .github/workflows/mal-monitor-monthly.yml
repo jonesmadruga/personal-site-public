@@ -1,0 +1,83 @@
+name: mal-monitor — monthly PDF report
+
+on:
+  schedule:
+    # 09:00 UTC on the 1st of each month
+    - cron: "0 9 1 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mal-monitor-monthly
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: mal-monitor/scripts/requirements.txt
+
+      - name: Install deps
+        run: pip install -r mal-monitor/scripts/requirements.txt
+
+      - name: Build monthly PDF
+        run: python mal-monitor/scripts/monthly_report.py
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mal-monitor-monthly-pdf
+          path: mal-monitor/reports/mal-monitor-*.pdf
+          if-no-files-found: error
+
+      - name: Email PDF
+        env:
+          DIGEST_SMTP_HOST: ${{ secrets.DIGEST_SMTP_HOST }}
+          DIGEST_SMTP_PORT: ${{ secrets.DIGEST_SMTP_PORT }}
+          DIGEST_SMTP_USER: ${{ secrets.DIGEST_SMTP_USER }}
+          DIGEST_SMTP_PASS: ${{ secrets.DIGEST_SMTP_PASS }}
+          DIGEST_FROM: ${{ secrets.DIGEST_FROM }}
+          DIGEST_TO: ${{ secrets.DIGEST_TO }}
+        run: |
+          python - <<'PY'
+          import os, smtplib, glob
+          from email.message import EmailMessage
+          from pathlib import Path
+          pdfs = sorted(glob.glob("mal-monitor/reports/mal-monitor-*.pdf"))
+          if not pdfs:
+              raise SystemExit("no PDF produced")
+          latest = pdfs[-1]
+          msg = EmailMessage()
+          msg["Subject"] = f"[Mal monitor] Monthly report — {Path(latest).stem}"
+          msg["From"] = os.environ["DIGEST_FROM"]
+          msg["To"] = os.environ["DIGEST_TO"]
+          msg.set_content(f"Attached: {Path(latest).name}")
+          with open(latest, "rb") as f:
+              msg.add_attachment(
+                  f.read(), maintype="application", subtype="pdf",
+                  filename=Path(latest).name,
+              )
+          with smtplib.SMTP(os.environ["DIGEST_SMTP_HOST"],
+                            int(os.environ["DIGEST_SMTP_PORT"])) as s:
+              s.starttls()
+              s.login(os.environ["DIGEST_SMTP_USER"], os.environ["DIGEST_SMTP_PASS"])
+              s.send_message(msg)
+          PY
+
+      - name: Commit PDF
+        run: |
+          if [[ -n "$(git status --porcelain mal-monitor/reports/)" ]]; then
+            git config user.name "mal-monitor-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add mal-monitor/reports/*.pdf
+            git commit -m "mal-monitor: monthly report ($(date -u +%Y-%m))"
+            git push
+          fi
