@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Mal (mal.ai) monitoring</title>
+  </head>
+  <body>
+    <outline text="Regional press">
+      <outline type="rss" text="The National — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Athenationalnews.com&amp;hl=en-AE&amp;gl=AE&amp;ceid=AE:en"/>
+      <outline type="rss" text="Gulf News — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Agulfnews.com&amp;hl=en-AE&amp;gl=AE&amp;ceid=AE:en"/>
+      <outline type="rss" text="Khaleej Times — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Akhaleejtimes.com&amp;hl=en-AE&amp;gl=AE&amp;ceid=AE:en"/>
+      <outline type="rss" text="Arabian Business — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Aarabianbusiness.com&amp;hl=en-AE&amp;gl=AE&amp;ceid=AE:en"/>
+      <outline type="rss" text="The National — Business" xmlUrl="https://www.thenationalnews.com/business/rss.xml"/>
+    </outline>
+    <outline text="Tech press MENA">
+      <outline type="rss" text="Wamda" xmlUrl="https://www.wamda.com/feed"/>
+      <outline type="rss" text="MENAbytes — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Amenabytes.com&amp;hl=en&amp;gl=US&amp;ceid=US:en"/>
+    </outline>
+    <outline text="Tech press global">
+      <outline type="rss" text="TechCrunch — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Atechcrunch.com&amp;hl=en&amp;gl=US&amp;ceid=US:en"/>
+      <outline type="rss" text="Sifted — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Asifted.eu&amp;hl=en&amp;gl=US&amp;ceid=US:en"/>
+    </outline>
+    <outline text="Islamic finance press">
+      <outline type="rss" text="Salaam Gateway — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Asalaamgateway.com&amp;hl=en&amp;gl=US&amp;ceid=US:en"/>
+      <outline type="rss" text="Islamic Finance News — search" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+site%3Aislamicfinancenews.com&amp;hl=en&amp;gl=US&amp;ceid=US:en"/>
+    </outline>
+    <outline text="Catch-all">
+      <outline type="rss" text="Google News — global" xmlUrl="https://news.google.com/rss/search?q=%22mal.ai%22+OR+%22Mal+AI%22+%22Islamic+finance%22&amp;hl=en&amp;gl=US&amp;ceid=US:en"/>
+    </outline>
+    <outline text="X via Nitter (rotate instance if dead)">
+      <outline type="rss" text="X — company mentions" xmlUrl="https://nitter.net/search/rss?f=tweets&amp;q=%22mal.ai%22+OR+%22Mal+AI%22"/>
+      <outline type="rss" text="X — @mal_ai handle" xmlUrl="https://nitter.net/mal_ai/rss"/>
+    </outline>
+  </body>
+</opml>

@@ -1,0 +1,53 @@
+name: mal-monitor — daily digest
+
+on:
+  schedule:
+    # 08:00 UTC = 12:00 Gulf Standard Time
+    - cron: "0 8 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mal-monitor-daily
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: mal-monitor/scripts/requirements.txt
+
+      - name: Install deps
+        run: pip install -r mal-monitor/scripts/requirements.txt
+
+      - name: Aggregate feeds
+        run: python mal-monitor/scripts/aggregate.py
+
+      - name: Send digest
+        env:
+          DIGEST_SMTP_HOST: ${{ secrets.DIGEST_SMTP_HOST }}
+          DIGEST_SMTP_PORT: ${{ secrets.DIGEST_SMTP_PORT }}
+          DIGEST_SMTP_USER: ${{ secrets.DIGEST_SMTP_USER }}
+          DIGEST_SMTP_PASS: ${{ secrets.DIGEST_SMTP_PASS }}
+          DIGEST_FROM: ${{ secrets.DIGEST_FROM }}
+          DIGEST_TO: ${{ secrets.DIGEST_TO }}
+          DIGEST_WINDOW_HOURS: "24"
+        run: python mal-monitor/scripts/digest_email.py
+
+      - name: Commit state
+        run: |
+          if [[ -n "$(git status --porcelain mal-monitor/reports/mentions.jsonl)" ]]; then
+            git config user.name "mal-monitor-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add mal-monitor/reports/mentions.jsonl
+            git commit -m "mal-monitor: append daily mentions ($(date -u +%Y-%m-%d))"
+            git push
+          fi
